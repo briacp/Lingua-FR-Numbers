@@ -1,5 +1,10 @@
 Lingua::FR::Numbers Changelog
 -----------------------------
+0.05 - Tue Jul  5 20:04:46 2016
+     - Fix decimal numbers representation (thanks for Sebastien Thebert for the
+       fix)
+     - Workaround for a bug on some architecture that would output "million de
+       billion" instead of "trillion"
 
 0.04 - Sat Dec 28 15:32:29 CET 2002
      - ** The interface for this module has changed **
