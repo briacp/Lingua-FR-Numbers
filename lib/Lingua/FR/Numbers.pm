@@ -247,6 +247,9 @@ sub number_to_fr {
                 $fr_power .= 's' if $number > 1;
                 $fr_power .= " de $NUMBER_NAMES{$sub_power}s";
 
+                # XXX Ugly hack - some architecture output "million de billion" instead of "trillion"
+                $fr_power =~ s/million(s)? de billions?/trillion$1/g;
+
                 push @fr_string, $fr_power;
             }
         }
