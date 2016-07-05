@@ -12,7 +12,7 @@ use vars qw(
   $SIGN_NAMES
 );
 
-$VERSION                  = 0.04;
+$VERSION                  = 0.05;
 @ISA                      = qw(Exporter);
 @EXPORT_OK                = qw( &number_to_fr &ordinate_to_fr );
 $SIGN_NAMES               = ('moins');
@@ -94,8 +94,9 @@ sub number_to_fr {
 
         push @fr_string, number_to_fr( int $number ), $OUTPUT_DECIMAL_DELIMITER;
 
-        # XXX
-        if ( $decimal =~ s/^(0+)// ) {
+        # Decimal numbers are correctly interpreted
+        # https://github.com/sebthebert/Lingua-FR-Numbers/commit/89b717da8950d183488c6d93c7d5e638628ef13f
+        if ( $decimal =~ s/^(0+([1-9][0-9]*))$/$2/ ) {
             my $decimal_power = 10**length $1;
             last unless $decimal_power;
             my $fr_decimal;
