@@ -12,7 +12,7 @@ use vars qw(
   $SIGN_NAMES
 );
 
-$VERSION                  = 0.05;
+$VERSION                  = 0.06;
 @ISA                      = qw(Exporter);
 @EXPORT_OK                = qw( &number_to_fr &ordinate_to_fr );
 $SIGN_NAMES               = ('moins');
