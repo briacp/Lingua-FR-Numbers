@@ -1,6 +1,7 @@
 package Lingua::FR::Numbers;
 use strict;
 
+use utf8; # some accents here and there
 use Carp qw(carp);
 use Exporter;
 use vars qw( $VERSION @ISA @EXPORT_OK );
@@ -12,13 +13,13 @@ use vars qw(
   $SIGN_NAMES
 );
 
-$VERSION                  = 0.06;
+$VERSION                  = '1.161910';
 @ISA                      = qw(Exporter);
 @EXPORT_OK                = qw( &number_to_fr &ordinate_to_fr );
 $SIGN_NAMES               = ('moins');
 $OUTPUT_DECIMAL_DELIMITER = ('virgule');
 %NUMBER_NAMES             = (
-    0    => 'zéro',
+    0    => 'zÃ©ro',
     1    => 'un',
     2    => 'deux',
     3    => 'trois',
@@ -71,12 +72,12 @@ sub number_to_fr {
     # -q numbers
     if ( $number !~ /^([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?$/ ) {
         carp("Invalid number format: '$number'");
-        return undef;
+        return;
     }
 
     if ( $number > ( 1e75 - 1 ) ) {
         carp("Number '$number' too big to be represented as string");
-        return undef;
+        return;
     }
 
     return $NUMBER_NAMES{0} if $number == 0;
@@ -153,8 +154,8 @@ sub number_to_fr {
 
             $fr_hundred .= $NUMBER_NAMES{100};
 
-            # Cent prend un 's' quand il est multiplié par un autre
-            # nombre et qu'il termine l'adjectif numéral.
+            # Cent prend un 's' quand il est multipliÃ© par un autre
+            # nombre et qu'il termine l'adjectif numÃ©ral.
             $fr_hundred .= 's'
               if ( $hundred > 1 && !$teens && !$units && $_ == $#blocks );
 
@@ -170,7 +171,7 @@ sub number_to_fr {
           &&    # On ne dit pas 'un mille' (A bit awkward to put here)
           !( $number == 1 && ( $power == 1000 ) );
 
-        # Cas spécial pour les 80
+        # Cas spÃ©cial pour les 80
         # On dit 'quatre-vingts' mais 'quatre-vingt-deux'
         if ( $teens == 8 ) {
             $fr_decimal = $units
@@ -178,7 +179,7 @@ sub number_to_fr {
               : $NUMBER_NAMES{ $teens * 10 } . 's';
         }
 
-        # Cas spécial pour les nombres en 70 et 90
+        # Cas spÃ©cial pour les nombres en 70 et 90
         elsif ( $teens == 7 || $teens == 9 ) {
             $units += 10;
             if ( $teens == 7 && $units == 11 ) {
@@ -192,9 +193,9 @@ sub number_to_fr {
 
         }
 
-        # Un nombre s'écrit avec un trait d'union sauf s'il est associé
-        # à 'cent' ou à 'mille'; ou s'il est relié par 'et'.
-        # Nombres écrits avec des 'et': 21, 31, 51, 61, 71
+        # Un nombre s'Ã©crit avec un trait d'union sauf s'il est associÃ©
+        # Ã  'cent' ou Ã  'mille'; ou s'il est reliÃ© par 'et'.
+        # Nombres Ã©crits avec des 'et': 21, 31, 51, 61, 71
         elsif ($teens) {
             if ( $teens == 1 ) {
                 $fr_decimal = $NUMBER_NAMES{ $teens * 10 + $units };
@@ -265,7 +266,7 @@ sub ordinate_to_fr {
 
     unless ( $number > 0 ) {
         carp('Ordinates must be strictly positive');
-        return undef;
+        return;
     }
     return $ORDINALS{1} if $number == 1;
 
@@ -277,8 +278,8 @@ sub ordinate_to_fr {
         $ordinal =~ s/$replace$/$ORDINALS{$last_digit}/;
     }
 
-    $ordinal =~ s/e?$/ième/;
-    $ordinal =~ s/vingtsième/vingtième/;    # Bug #1772
+    $ordinal =~ s/e?$/iÃ¨me/;
+    $ordinal =~ s/vingtsiÃ¨me/vingtiÃ¨me/;    # Bug #1772
     $ordinal;
 }
 
@@ -312,6 +313,8 @@ sub get_ordinate {
 __END__
 
 =pod
+
+=encoding utf8
 
 =head1 NAME
 
@@ -373,7 +376,7 @@ at least for now.
  use Lingua::FR::Numbers qw(number_to_fr);
  my $depth = number_to_fr( 20_000 );
  my $year  = number_to_fr( 1870 );
- print "Jules Vernes écrivit _$depth lieues sous les mers_ en $year.";
+ print "Jules Vernes Ã©crivit _$depth lieues sous les mers_ en $year.";
 
 This function can be exported by the module.
 
@@ -391,9 +394,9 @@ This function can be exported by the module.
 
  my $start = Lingua::FR::Numbers->new( 500 );
  my $end   = Lingua::FR::Numbers->new( 3000 );
- print "Nous partîmes ", $start->get_string, 
+ print "Nous partÃ®mes ", $start->get_string, 
        "; mais par un prompt renfort\n",
-       "Nous nous vîmes ", $end->get_string," en arrivant au port"
+       "Nous nous vÃ®mes ", $end->get_string," en arrivant au port"
 
 Creates and initializes a new instance of an object.
 
@@ -432,10 +435,10 @@ lower than 1e75-1.
 
 =head1 SOURCE
 
-I<Le français correct - Maurice GREVISSE>
+I<Le franÃ§ais correct - Maurice GREVISSE>
 
-I<Décret n° 61-501 du 3 mai 1961. relatif aux unités de mesure
-et au contrôle des instruments de mesure.>
+I<DÃ©cret nÂ° 61-501 du 3 mai 1961. relatif aux unitÃ©s de mesure
+et au contrÃ´le des instruments de mesure.>
 - http://www.adminet.com/jo/dec61-501.html
 
 =head1 BUGS
@@ -448,12 +451,12 @@ https://rt.cpan.org/NoAuth/Bugs.html?Dist=Lingua-FR-Numbers
 
 =head1 COPYRIGHT
 
-Copyright 2002, Briac Pilpré. All Rights Reserved. This module can be
+Copyright 2002, Briac PilprÃ©. All Rights Reserved. This module can be
 redistributed under the same terms as Perl itself.
 
 =head1 AUTHOR
 
-Briac Pilpré <briac@cpan.org>
+Briac PilprÃ© <briac@cpan.org>
 
 =head1 SEE ALSO
 
