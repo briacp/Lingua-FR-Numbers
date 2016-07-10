@@ -3,6 +3,7 @@ Lingua::FR::Numbers Changelog
 1.161910 - Sun Jul 10 00:22:45 2016
       - Use Dist::Zilla for building modules and avoid troubles with version numbers
       - Cleaned up encoding in test and module
+      
 0.06.1 - Sat Jul  9 22:24:51 2016
       - Use Math::BigInt for reliable tests
 

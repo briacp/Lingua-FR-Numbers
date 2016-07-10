@@ -88,7 +88,7 @@
 #   1e30                  => 'un quintillion',
 #   1e36                  => 'un sextillion',
 
-99_999_999_999_999_999_616_392 => 
+99_999_999_999_999_984_616_392 => 
   'quatre-vingt-dix-neuf billions de milliards '
 . 'neuf cent quatre-vingt-dix-neuf trillions '
 . 'neuf cent quatre-vingt-dix-neuf millions de milliards '

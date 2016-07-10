@@ -1,6 +1,7 @@
 *.swp
 *.gz
 blib
+.build
 Makefile
 MYMETA.json
 MYMETA.yml
