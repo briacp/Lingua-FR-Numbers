@@ -1,5 +1,12 @@
 Lingua::FR::Numbers Changelog
 -----------------------------
+
+{{$NEXT}}
+
+1.161950  2016-07-13 12:40:33CEST+0200 Europe/Paris
+      - Use bignum instead of Math::BigInt. Tests are passing on my longdouble perl install.
+      - Allow for '_' characters when passing a string as number.
+
 1.161910 - Sun Jul 10 00:22:45 2016
       - Use Dist::Zilla for building modules and avoid troubles with version numbers
       - Cleaned up encoding in test and module
@@ -28,7 +35,7 @@ Lingua::FR::Numbers Changelog
 0.03 - Sun Nov 10 14:00:06 CET 2002
      - The decimal support is a bit better and hopefully more correct.
      - Fixed RT bug #1772: The ordinate output for '80' was
-       'quatre-vingtsième' instead of 'quatre-vingtième'. Added tests
+       'quatre-vingtsiÃ¨me' instead of 'quatre-vingtiÃ¨me'. Added tests
        to check this behavior. (thanks to Philippe Bricout for
        finding this bug)
      - Fixed an inaccuracy in Ordinate.pm doc (Philippe Brivout)

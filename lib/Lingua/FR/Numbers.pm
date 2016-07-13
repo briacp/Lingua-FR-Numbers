@@ -70,6 +70,7 @@ sub number_to_fr {
 
     # Test if $number is really a number, or return undef, from perldoc
     # -q numbers
+    $number =~ s/_//g; # Allow for '_' separating figures
     if ( $number !~ /^([+-]?)(?=\d|\.\d)\d*(\.\d*)?([Ee]([+-]?\d+))?$/ ) {
         carp("Invalid number format: '$number'");
         return;

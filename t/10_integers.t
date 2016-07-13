@@ -3,7 +3,7 @@ use strict;
 use Test;
 BEGIN { plan tests => 76 }
 use Lingua::FR::Numbers qw( number_to_fr );
-use Math::BigInt;
+use bignum;
 
 use vars qw(@numbers);
 do 't/numbers';

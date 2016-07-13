@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use Test;
+use bignum;
 BEGIN { plan tests => 152 }
 use Lingua::FR::Numbers;
 use vars qw(@numbers);
